@@ -13,6 +13,8 @@ ERROR CASES: Return NULL for invalid Inputs.
 NOTES:
 */
 
+#include <malloc.h>
+#include <string.h>
 #include <stdio.h>
 
 struct student {
@@ -20,10 +22,28 @@ struct student {
 	int score;
 };
 
-void * scoresDescendingSort(struct student *students, int len) 
+void *scoresDescendingSort(struct student *students, int len) 
 {
+	int i = 0, j = 0, tempscore = 0;
+	char *tempname = (char*)malloc(sizeof(char) * 10);
+
 	if (len <= 0 || students == NULL)
 		return NULL;
 
-
+	for (i = 0; i < len; i++)
+	{
+		for (j = i + 1; j < len; j++)
+		{
+			if (students[i].score < students[j].score)
+			{
+				strcpy(tempname, students[i].name);
+				tempscore = students[i].score;
+				strcpy(students[i].name, students[j].name);
+				students[i].score = students[j].score;
+				strcpy(students[j].name, tempname);
+				students[j].score = tempscore;
+			}
+		}
+	}
+	return students;
 }

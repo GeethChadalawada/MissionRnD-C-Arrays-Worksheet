@@ -21,6 +21,8 @@ struct student {
 	int score;
 };
 
-struct student ** topKStudents(struct student *students, int len, int K) {
-	return NULL;
+struct student ** topKStudents(struct student *students, int len, int K) 
+{
+	if (students == NULL || len <= 0 || K <= 0 || K > len)
+		return NULL;
 }
